@@ -1,0 +1,32 @@
+.reportContainer{
+
+}
+.innerContainer{
+    @apply container m-auto  w-full px-5 md:px-0
+}
+.title{
+    @apply bg-primary-200 mt-5 p-5 rounded-xl shadow
+}
+.title h1{
+    @apply md:text-4xl text-xl text-secondary-400
+}
+.body{
+     @apply bg-primary-200 mt-3 p-5 rounded-xl shadow
+}
+.table{
+    height: 500px;
+
+}
+@media (min-width: 768px) {
+    .table{
+    height: calc( 100vh - 450px);
+
+}
+}
+.pagination{
+    @apply my-5
+}
+.pagination .sweet .sweetPagination .paginationUL .pageItem .pageButton{
+    height: 30px !important;
+    width: 30px !important;
+}

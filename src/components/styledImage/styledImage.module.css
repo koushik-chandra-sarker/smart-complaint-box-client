@@ -1,0 +1,10 @@
+.roundedImage{
+    @apply relative rounded-full bg-primary-200 flex justify-center items-center
+}
+.roundedImage::before{
+    content: "";
+    @apply absolute  w-[130%]  h-[130%] rounded-full flex justify-center items-center border-2 border-dashed border-secondary-400
+}
+.roundedImage img{
+    @apply absolute bottom-0 left-0 right-0 w-[140%]  h-[140%] rounded-b-full object-cover
+}

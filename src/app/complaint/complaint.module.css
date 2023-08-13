@@ -1,0 +1,28 @@
+.complaintContainer{
+
+}
+.innerContainer{
+    @apply container m-auto  w-full md:px-0 px-5
+}
+.title{
+    @apply bg-primary-200 mt-5 p-5 rounded-xl shadow
+}
+.title h1{
+    @apply md:text-4xl text-2xl text-secondary-400
+}
+.body{
+     @apply bg-primary-200 mt-3 p-5 rounded-xl shadow
+}
+.table{
+    height: calc( 100vh - 450px);
+}
+.actionButton {
+    @apply flex justify-end
+}
+.actionButton .button {
+    @apply inline-flex items-center bg-primary-400  hover:bg-primary-500 text-white border-0
+    py-1 px-3 focus:outline-none transition rounded text-base mt-4 md:mt-0
+}
+.actionButton .button:nth-child(1){
+    @apply !bg-secondary-400 hover:!bg-secondary-500
+}

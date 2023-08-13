@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-primary-100 flex flex-col min-h-screen
+}
+
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal-content {
+  max-width: 400px;
+  opacity: 1; /* Set the default opacity */
+  transform: translateY(0); /* Optional: You can add a translation for an entrance effect */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Styling for closed modal */
+.modal-content.closed {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+.modal-open {
+  overflow: hidden;
+}
+.sweet  .paginationUL .pageItem .pageButton{
+    height: 30px !important;
+    width: 30px !important;
+}

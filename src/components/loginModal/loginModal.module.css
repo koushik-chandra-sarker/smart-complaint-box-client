@@ -1,0 +1,19 @@
+.loginContainer{
+    @apply flex flex-col justify-center items-center my-10 gap-5 w-full px-5
+}
+.logo {
+    @apply flex  font-medium items-center text-gray-900 mb-4 md:mb-0
+}
+
+.logo span {
+    @apply ml-3 text-xl text-primary-400 font-bold border border-primary-300 p-2 rounded
+}
+.loginContainer h4{
+    @apply text-4xl font-bold
+}
+.loginContainer form{
+    @apply w-full
+}
+.loginContainer form{
+    @apply w-full
+}

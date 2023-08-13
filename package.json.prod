@@ -1,0 +1,33 @@
+{
+  "name": "smart-complainbox-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+     "start": "NODE_ENV=production nodeserver.js.oldd",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "autoprefixer": "10.4.14",
+    "dayjs": "^1.11.9",
+    "formik": "^2.4.3",
+    "jwt-decode": "^3.1.2",
+    "lodash": "^4.17.21",
+    "next": "13.4.12",
+    "postcss": "8.4.27",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-redux": "^8.1.2",
+    "sweetalert2": "^11.7.22",
+    "sweetpagination": "^1.0.15",
+    "tailwindcss": "3.3.3",
+    "toastify-js": "^1.12.0"
+  },
+  "devDependencies": {
+    "daisyui": "^3.5.1",
+    "redux-devtools-extension": "^2.13.9",
+    "sass": "^1.64.2"
+  }
+}

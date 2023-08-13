@@ -1,0 +1,36 @@
+.hero {
+    @apply lg:h-[600px] md:h-[500px] h-[300px] relative
+}
+.hero .background .bgImg{
+    @apply w-full h-full absolute z-10 object-cover
+
+}
+.hero .background .overlay{
+    background: rgba(0, 0, 0, 0.45);
+    @apply w-full h-full absolute z-10
+
+}
+.hero .background  .inner{
+    @apply absolute w-full h-full flex flex-col justify-end md:pb-20 items-center gap-5 col-span-5 z-20
+}
+
+
+.hero .background  .inner h1 {
+    @apply md:text-4xl text-xl font-extrabold text-white text-center
+
+}
+.hero .background  .inner p{
+    @apply text-white text-center md:text-base text-sm
+}
+
+.hero .inner .actionButton {
+    @apply flex gap-5
+}
+
+.actionButton .button {
+    @apply inline-flex items-center bg-primary-400  hover:bg-primary-500 text-white border-0
+    py-1 px-3 focus:outline-none transition rounded text-base mt-4 md:mt-0
+}
+.actionButton .button:nth-child(1){
+    /*@apply !bg-secondary-400 hover:!bg-secondary-500*/
+}
