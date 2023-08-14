@@ -5,6 +5,7 @@ import {useGetAllComplaintQuery} from "@/redux/services/complaintApi";
 import {usePathname} from "next/navigation";
 import {useRouter} from "next/navigation";
 import Loading from "@/components/loader/loading";
+
 const getStatusBadgeClasses = (status) => {
     switch (status) {
         case 'pending':
@@ -40,7 +41,10 @@ const Page = () => {
     const router = useRouter()
     const pathname = usePathname()
     const [currentPageData, setCurrentPageData] = useState(new Array(2).fill());
-    const {data: complaintList, isLoading: isComplListLoading} = useGetAllComplaintQuery("/?ordering=-id", {refetchOnMountOrArgChange:true})
+    const {
+        data: complaintList,
+        isLoading: isComplListLoading
+    } = useGetAllComplaintQuery("/?ordering=-id", {refetchOnMountOrArgChange: true})
 
     function handleRowClick(id) {
         router.push(pathname + `/${id}`)
@@ -59,7 +63,9 @@ const Page = () => {
                             <>
                                 <div>
                                     <div className={`overflow-x-auto ${styles.table}`}>
-                                        <p className={"text-xs mb-5 text-blue-400"}>নোট: বিস্তারিত দেখতে, একটি সারিতে ক্লিক করুন</p>
+                                        <p className={"text-xs mb-5 text-blue-400"}>
+                                            নোট: বিস্তারিত দেখতে, একটি সারি নির্বাচন করুন।
+                                        </p>
                                         <table className="table md:table-sm table-xs table-pin-rows table-zebra">
                                             {/*<colgroup>*/}
                                             {/*    <col/>*/}
