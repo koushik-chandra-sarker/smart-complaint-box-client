@@ -10,17 +10,18 @@ import {useFormik} from "formik";
 import {complaint_form_validation} from "@/utils/validations";
 import {useAddComplaintMutation} from "@/redux/services/complaintApi";
 import Swal from "sweetalert2";
+import Loading from "@/components/loader/loading";
 
 const Page = () => {
     const [selectedMunicipality, setSelectedMunicipality] = useState(0)
-    const [selectedZone, setSelectedZone] = useState(0)
+    const [submitLoading, setSubmitLoading] = useState(false)
     const [selectedInstituteTypeId, setSelectedInstituteTypeId] = useState(0)
     const [filteredInstitution, setFilteredInstitution] = useState(0)
     const [addComplaint, {isLoading}] = useAddComplaintMutation()
-    const {data: municipalityList} = useGetAllMunicipalityQuery();
-    const {data: institutionTypeList} = useGetAllInstitutionTypeQuery();
-    const {data: designationList} = useGetAllDesignationQuery();
-    const {data: commonProperty} = useGetCommonPropertyQuery();
+    const {data: municipalityList, isLoading: isMuniLoading} = useGetAllMunicipalityQuery();
+    const {data: institutionTypeList, isLoading: isInstTypeLoading} = useGetAllInstitutionTypeQuery();
+    const {data: designationList, isLoading: isDesigLoading} = useGetAllDesignationQuery();
+    const {data: commonProperty, isLoading: isCommonPropLoading} = useGetCommonPropertyQuery();
 
 
     function handleSelectMunicipality(e) {
@@ -29,16 +30,11 @@ const Page = () => {
         setSelectedMunicipality(municipality);
     }
 
-    function handleSelectZone(e) {
-        const zoneId = e.target.value;
-        const zone = selectedMunicipality?.zone_set?.find(zone => zone.id == zoneId);
-        setSelectedZone(zone);
-    }
 
     function handleSelectInstituteType(e) {
         const id = e.target.value;
         setSelectedInstituteTypeId(id);
-        const instList = selectedZone?.institute_set?.filter(inst => inst.institute_type?.id == id);
+        const instList = selectedMunicipality?.institute_set?.filter(inst => inst.institute_type?.id == id);
         setFilteredInstitution(instList);
     }
 
@@ -61,28 +57,38 @@ const Page = () => {
         },
         validate: complaint_form_validation,
         onSubmit: values => {
+            setSubmitLoading(true)
             addComplaint(values).unwrap().then(res => {
                 Swal.fire(
                     'Successful',
                     'Complaint sent to authority',
                     'success'
-                ).then(r => {})
+                ).then(r => {
+                })
                 complaintFormik.resetForm()
                 setSelectedMunicipality(0)
-                setSelectedZone(0)
                 setSelectedInstituteTypeId(0)
-            }, error =>{
-               Swal.fire({
-                      icon: 'error',
-                      title: 'Oops...',
-                      text: 'Something went wrong!',
-               }).then(r => {})
+                setSubmitLoading(false)
+            }, error => {
+                setSubmitLoading(false)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                }).then(r => {
+                })
+
             })
 
         },
 
     });
+    if (isMuniLoading || isInstTypeLoading || isDesigLoading || isCommonPropLoading) {
+        return (
+            <Loading classes={"h-[500px]"}/>
 
+        )
+    }
     return (
         <div className={styles.complaintContainer}>
             <div className={styles.innerContainer}>
@@ -103,12 +109,13 @@ const Page = () => {
                                 </label>
                                 <select className="select select-bordered w-full"
 
-                                        // disabled={complaintFormik.values.student_class === 0}
+                                    // disabled={complaintFormik.values.student_class === 0}
                                         id={"complained_to"}
                                         name={"complained_to"}
                                         value={complaintFormik.values.complained_to}
                                         onChange={complaintFormik.handleChange}
                                 >
+
                                     <option disabled value="0">--নির্বাচন করুন--</option>
                                     {
                                         designationList && designationList?.map((d, index) => (
@@ -128,7 +135,7 @@ const Page = () => {
                                 </label>
                                 <select className="select select-bordered w-full"
 
-                                        // disabled={complaintFormik.values.complained_to === 0}
+                                    // disabled={complaintFormik.values.complained_to === 0}
                                         id={"subject"}
                                         name={"subject"}
                                         value={complaintFormik.values.subject}
@@ -142,9 +149,9 @@ const Page = () => {
                                     }
                                 </select>
                             </div>
-                            <div className="form-control w-full ">
+                            {/*<div className="form-control w-full ">
                                 <label className="label">
-                                    {/*<span className="label-text">Title</span>*/}
+                                    <span className="label-text">Title</span>
                                     <span className="label-text">শিরোনাম</span>
                                     <span
                                         className="label-text bg-red-200 px-2 rounded text-red-500">
@@ -160,7 +167,7 @@ const Page = () => {
                                        className="input input-bordered w-full "/>
 
 
-                            </div>
+                            </div>*/}
                             <div className="form-control w-full ">
                                 <label className="label">
                                     {/*<span className="label-text">Complainant Type</span>*/}
@@ -212,7 +219,7 @@ const Page = () => {
                                         {complaintFormik.errors.complainant_phone}
                                     </span>
                                 </label>
-                                <input type="text" placeholder="মোবাইল নম্বর লিখুন"
+                                <input type="number" placeholder="মোবাইল নম্বর লিখুন"
 
                                        id={"complainant_phone"}
                                        name={"complainant_phone"}
@@ -254,32 +261,12 @@ const Page = () => {
                                     }
                                 </select>
                             </div>
-
-                            <div className="form-control w-full">
-                                <label className="label">
-                                    {/*<span className="label-text">Zone</span>*/}
-                                    <span className="label-text">গ্রামের নাম</span>
-                                </label>
-                                <select className="select select-bordered w-full "
-                                        disabled={_.isEmpty(selectedMunicipality)}
-                                        value={selectedZone}
-                                        onChange={handleSelectZone}
-
-                                >
-                                    <option disabled value="0">--নির্বাচন করুন--</option>
-                                    {
-                                        selectedMunicipality && selectedMunicipality?.zone_set?.map((zone, index) => (
-                                            <option value={zone.id} key={index}>{zone.name}</option>
-                                        ))
-                                    }
-                                </select>
-                            </div>
                             <div className="form-control w-full ">
                                 <label className="label">
                                     <span className="label-text">শিক্ষালয়ের ধরণ</span>
                                 </label>
                                 <select className="select select-bordered w-full "
-                                        disabled={_.isEmpty(selectedZone)}
+                                        disabled={_.isEmpty(selectedMunicipality)}
                                         defaultValue="0"
                                         onChange={handleSelectInstituteType}
 
@@ -365,7 +352,7 @@ const Page = () => {
                                         {complaintFormik.errors.student_roll}
                                     </span>
                                 </label>
-                                <input type="text"
+                                <input type="number"
                                        placeholder="শিক্ষার্থীর রোল নম্বর লিখুন"
                                        id={"student_roll"}
                                        name={"student_roll"}
@@ -373,7 +360,6 @@ const Page = () => {
                                        onChange={complaintFormik.handleChange}
                                        className="input input-bordered w-full "/>
                             </div>
-
 
 
                             {/* <div className="form-control w-full ">
@@ -405,6 +391,10 @@ const Page = () => {
                         </div>
                         <div className={'columns-1 mt-10'}>
                             <div className={styles.actionButton}>
+                                {submitLoading &&
+                                    <span className="loading loading-dots loading-lg text-gray-500 mr-5"></span>
+
+                                }
                                 <button type={"submit"} className={styles.button}>দাখিল করুন</button>
                             </div>
                         </div>

@@ -25,7 +25,8 @@ const Header = () => {
 
                 <div className={"flex gap-5 "}>
                     <Link href={"/"} className={styles.logo}>
-                        <span>স্মার্ট অভিযোগ বক্স</span>
+                        {/*<span>স্মার্ট অভিযোগ বক্স</span>*/}
+                        <Image src={"/images/logo.png"} alt={"logo"} width={500} height={500}/>
                     </Link>
                     <section className={styles.menu}>
                         {
@@ -57,11 +58,11 @@ const Header = () => {
                     }
                 </div>
                 <div className="dropdown dropdown-end z-[1000] md:hidden">
-                    <label tabIndex={0} className="btn btn-ghost btn-circle">
+                    <label tabIndex={0} className="btn btn-ghost btn-circle pr-5">
                         <Image src={menuIcon} alt={"menuIcon"}/>
                     </label>
                     <ul tabIndex={0}
-                        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        className="menu menu-sm dropdown-content mt-3 mr-5 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                         {
                             !isAuthenticated ?
                                 basicNav.map((v, i) => (

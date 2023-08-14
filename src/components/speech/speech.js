@@ -16,6 +16,7 @@ const Speech = (props) => {
                     </p>
                     <h3 className={styles.name}>{props.speech.name}</h3>
                     <p className={styles.designation}>{props.speech.designation}</p>
+                    <p className={styles.locationn}>{props.speech.location}</p>
 
                 </div>
             </div>

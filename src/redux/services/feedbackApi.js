@@ -13,7 +13,6 @@ export const feedbackApi = createApi({
                 method: 'GET',
             }),
             transformResponse: (data) => {
-                console.log(data)
                 if (data.statusCode === 200) return data.data
                 else {
                     Toastify({

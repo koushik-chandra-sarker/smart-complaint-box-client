@@ -22,25 +22,22 @@ export function login_validation(values) {
 
 export function complaint_form_validation(values) {
     const errors = {};
+    const phoneRegex = /^0\d{10}$/;
     const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (!values.title) {
-        errors.title = "Required"
-    }
-    else if(!values.complainant_type) errors.complainant_type = "Required"
-    else if(!values.complainant_name) errors.complainant_name = "Required"
-    else if(!values.complainant_phone) errors.complainant_phone = "Required"
-    else if (!values.complainant_email) {
-        errors.complainant_email = 'Email Required';
-    } else if (!values.complainant_email.match(mailformat)) {
-        errors.complainant_email = 'Invalid email address';
-    }
-     else if(!values.student_name) errors.student_name = "Required"
-     else if(!values.student_roll) errors.student_roll = "Required"
-     else if(!values.student_class) errors.student_class = "Required"
-     else if(!values.institute) errors.institute = "Required"
-     else if(!values.complained_to) errors.complained_to = "Required"
-     else if(!values.subject) errors.subject = "Required"
-     else if(!values.details) errors.details = "Required"
+    if (!values.complainant_type) errors.complainant_type = "বাধ্যতামূলক"
+    else if (!values.complainant_name) errors.complainant_name = "বাধ্যতামূলক"
+    else if (!values.complainant_phone) errors.complainant_phone = "বাধ্যতামূলক"
+    else if (phoneRegex.test(values.complainant_phone)) {
+        errors.complainant_phone = "বাধ্যতামূলক"
+    } else if (values.complainant_email && !values.complainant_email.match(mailformat)) {
+        errors.complainant_email = 'Incorrect Number ';
+    } else if (!values.student_name) errors.student_name = "বাধ্যতামূলক"
+    else if (!values.student_roll) errors.student_roll = "বাধ্যতামূলক"
+    else if (!values.student_class) errors.student_class = "বাধ্যতামূলক"
+    else if (!values.institute) errors.institute = "বাধ্যতামূলক"
+    else if (!values.complained_to) errors.complained_to = "বাধ্যতামূলক"
+    else if (!values.subject) errors.subject = "বাধ্যতামূলক"
+    else if (!values.details) errors.details = "বাধ্যতামূলক"
 
     return errors;
 

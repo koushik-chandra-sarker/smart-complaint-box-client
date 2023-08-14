@@ -4,16 +4,17 @@
 }
 
 .inner {
-    @apply container mx-auto flex justify-between flex-wrap py-4  md:flex-row md:items-center
+    @apply container mx-auto flex justify-between flex-wrap py-2  md:flex-row md:items-center
 }
 
 .logo {
-    @apply flex  font-medium items-center text-gray-900 mb-4 md:mb-0 md:pl-0 pl-6
+    @apply flex  font-medium items-center text-gray-900 mb-4 md:mb-0 md:pl-0 pl-6 w-24
+
 }
 
-.logo span {
-    @apply md:text-xl  text-primary-400 font-bold border border-primary-300 p-2 rounded
-}
+/*.logo span {*/
+/*    @apply md:text-xl  text-primary-400 font-bold border border-primary-300 p-2 rounded*/
+/*}*/
 
 .menu {
     @apply md:ml-auto md:mr-auto hidden md:flex flex-wrap items-center text-base justify-center

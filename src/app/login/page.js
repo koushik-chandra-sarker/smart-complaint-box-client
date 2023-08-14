@@ -29,7 +29,6 @@ const Page = () => {
                     dispatch(loginSuccess(response.data))
                 }
             }, error => {
-                console.log(error)
             })
         },
     });
@@ -70,7 +69,10 @@ const Page = () => {
                                 </label>
                             </div>*/}
                             <div className="form-control w-full mt-5">
-                                <button type={"submit"} className="btn btn-block bg-primary-400 hover:bg-primary-500 text-white">লগইন
+                                <button type={"submit"} className="btn btn-block bg-primary-400 hover:bg-primary-500 text-white">
+                                    {
+                                        isLoading? <span className="loading loading-dots loading-sm"></span>:  <>লগইন</>
+                                    }
                                 </button>
                             </div>
                         </div>

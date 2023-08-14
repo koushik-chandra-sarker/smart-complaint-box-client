@@ -32,18 +32,14 @@ function isTokenExpired(token) {
 export const baseQueryWithAuth = fetchBaseQuery({
     baseUrl: API.baseUrl,
     prepareHeaders: (headers, {getState}) => {
-        console.log(getState())
         const token = getState().auth.accessToken;
         const refToken = getState().auth.refreshToken;
         if (!isTokenExpired(token)) {
-            console.log("token valid")
             headers.set('Authorization', `Bearer ${token}`);
         } else if (!isTokenExpired(refToken)) {
-            console.log("refreshing token")
             const newToken = refreshToken()
             headers.set('Authorization', `Bearer ${newToken}`);
         } else {
-            console.log("redirecting to login")
 
             // window.location.href("/login")
         }

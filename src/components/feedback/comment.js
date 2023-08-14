@@ -15,7 +15,6 @@ const Comment = ({complaintId, feedback, refetchFeedback}) => {
             parent: feedback.id
         },
         onSubmit: values => {
-            console.log(values)
             addFeedback(values).unwrap().then(response => {
                 refetchFeedback()
                 replayForm.resetForm()
