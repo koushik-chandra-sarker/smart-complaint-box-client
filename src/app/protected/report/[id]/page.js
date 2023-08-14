@@ -1,11 +1,12 @@
 "use client"
 import React, {useEffect, useState} from 'react';
 import styles from "@/app/protected/report/report.module.css";
-import {useGetComplaintByIdQuery} from "@/redux/services/complaintApi";
+import {useGetComplaintByIdQuery, useUpdateComplaintStatusMutation} from "@/redux/services/complaintApi";
 import Loading from "@/components/loader/loading";
 import {statusList} from "@/utils/data";
 import _ from "lodash"
 import Feedback from "@/components/feedback/feedback";
+import Swal from "sweetalert2";
 
 const getStatusBadgeClasses = (status) => {
     switch (status) {
@@ -39,11 +40,13 @@ const Page = ({params}) => {
     const {data: complaint, isLoading: isComplaintLoading} = useGetComplaintByIdQuery(params.id)
     const [selectedStatus, setSelectedStatus] = useState()
     const [statusBadgeClasses, setStatusBadgeClasses] = useState()
+    const [updateComplaintStatus, {isLoading}] = useUpdateComplaintStatusMutation()
 
     useEffect(() => {
         if (!_.isEmpty(complaint)) {
             setSelectedStatus(complaint.status)
             setStatusBadgeClasses(getStatusBadgeClasses(complaint.status))
+
         }
     }, [complaint])
     if (isComplaintLoading) {
@@ -53,8 +56,29 @@ const Page = ({params}) => {
     }
 
     function handleSelectStatus(e) {
+        const initialStatus = selectedStatus;
+        const initialBaseClass = statusBadgeClasses;
         setSelectedStatus(e.target.value)
         setStatusBadgeClasses(getStatusBadgeClasses(e.target.value))
+        updateComplaintStatus({id: params.id, status: e.target.value}).unwrap().then(() => {
+
+            Swal.fire(
+                'Successful',
+                'Status update successful',
+                'success'
+            ).then(r => {
+            })
+
+        }, () => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+            }).then(r => {
+            })
+            setSelectedStatus(initialStatus)
+            setStatusBadgeClasses(initialBaseClass)
+        })
 
 
     }

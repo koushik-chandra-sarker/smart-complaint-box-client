@@ -32,7 +32,7 @@ export const complaintApi = createApi({
         }),
         updateComplaintStatus: builder.mutation({
             query: (data) => ({
-                url: API.complaintBox.complaint.add,
+                url: API.complaintBox.complaint.updateStatus+data.id+"/update_status/",
                 method: 'PATCH',
                 body: data
             }),
@@ -44,5 +44,6 @@ export const complaintApi = createApi({
 export const {
     useGetAllComplaintQuery,
     useGetComplaintByIdQuery,
-    useAddComplaintMutation
+    useAddComplaintMutation,
+    useUpdateComplaintStatusMutation
 } = complaintApi;

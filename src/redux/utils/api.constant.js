@@ -26,7 +26,8 @@ export const API = {
         },
         complaint:{
             get: "complaint-box/v1/get-complaints",
-            add: "/complaint-box/v1/complaints/"
+            add: "/complaint-box/v1/complaints/",
+            updateStatus: "/complaint-box/v1/complaints/"
         },
         feedback: {
             getByComId: "/complaint-box/v1/feedback/complaint/",
