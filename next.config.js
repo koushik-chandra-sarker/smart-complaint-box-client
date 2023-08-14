@@ -4,8 +4,8 @@ const nextConfig = {
     // reactStrictMode: false,
     // distDir: 'build',
     images: {
-        unoptimized: true,
-        domains: ['smartavijogbox.com', 'media.smartavijogbox.com']
+        // unoptimized: true,
+        domains: ['smartovijogbox.com', 'file.smartovijogbox.com']
     }
 }
 

@@ -4,6 +4,7 @@ import officerImage from "/public/images/officers.jpg"
 import Speech from "@/components/speech/speech";
 import Link from "next/link";
 import icon from "/public/icon/menu.svg"
+import {homaPage} from "@/utils/data";
 
 export default function Home() {
 
@@ -11,7 +12,7 @@ export default function Home() {
         <div>
             <div className={styles.hero}>
                 <div className={styles.background}>
-                    <Image className={styles.bgImg} src={"https://media.smartavijogbox.com/files/assets//officers.jpg"} width={1000} height={800} alt={"banner"}/>
+                    <Image className={styles.bgImg} src={"https://file.smartovijogbox.com/media/assets/officers.jpg"} width={1000} height={800} alt={"banner"}/>
                     <div className={styles.overlay}/>
                     <div className={styles.inner}>
                         <div className={"flex flex-col gap-5 items-center"}>
@@ -49,7 +50,7 @@ export default function Home() {
                 </div>
             </div>
             <div className={"md:mt-0 mt-52"}>
-                <Speech/>
+                <Speech speech={homaPage.speach1}/>
                 {/*<Speech reverse={true}/>*/}
             </div>
 
