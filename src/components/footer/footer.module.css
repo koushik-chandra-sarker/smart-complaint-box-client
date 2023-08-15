@@ -2,11 +2,11 @@
     @apply text-gray-600 border-t border-secondary-200 bg-primary-100 mt-4
 }
 .logo {
-    @apply flex  font-medium items-center text-gray-900 mb-4 md:mb-0
+    @apply flex  font-medium items-center text-gray-900 mb-4 md:mb-0 w-24
 }
-.logo span {
-    @apply ml-3 text-xl text-secondary-400 font-bold border border-secondary-400 p-2 rounded
-}
+/*.logo span {*/
+/*    @apply ml-3 text-xl text-secondary-400 font-bold border border-secondary-400 p-2 rounded*/
+/*}*/
  .copyright{
      @apply text-sm text-secondary-400 sm:ml-4 sm:pl-4   sm:py-2 sm:mt-0 mt-4 text-center
  }

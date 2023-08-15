@@ -8,12 +8,13 @@ import styles from "@/components/footer/footer.module.css";
 const Footer = () => {
     return (
         <footer className={styles.footer}>
-            <div className="container px-5 py-8 mx-auto flex items-center justify-between sm:flex-row flex-col">
+            <div className="container md:px-10 px-5 py-2 mx-auto flex items-center justify-between sm:flex-row flex-col">
                 <a className={styles.logo}>
-                    <span>স্মার্ট অভিযোগ বক্স</span>
+                    {/*<span>স্মার্ট অভিযোগ বক্স</span>*/}
+                    <Image src={"/images/logo.png"} width={200} height={200} alt={"logo"}/>
                 </a>
                 <p className={styles.copyright}>©
-                    ২০২৩ আইসিটি বিভাগ, উপজেলা অফিস, আশুগঞ্জ, ব্রাহ্মণবাড়িয়া — সমস্ত অধিকার সংরক্ষিত
+                    ২০২৩ উপজেলা প্রশাসন আশুগঞ্জ,ব্রাহ্মণবাড়িয়া। — সমস্ত অধিকার সংরক্ষিত
                 </p>
                 <div>
 
