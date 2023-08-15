@@ -3,7 +3,7 @@
 }
 
 .innerContainer {
-    @apply container m-auto  w-full px-5 md:px-0
+    @apply container m-auto  w-full md:px-10 px-5
 }
 
 .title {
