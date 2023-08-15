@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import styles from "./page.module.css"
-import officerImage from "/public/images/officers.jpg"
 import Speech from "@/components/speech/speech";
 import Link from "next/link";
 import icon from "/public/icon/menu.svg"

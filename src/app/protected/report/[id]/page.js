@@ -156,7 +156,7 @@ const Page = ({params}) => {
                                 </div>
                             </div>
                             <div className={styles.body}>
-                                <Feedback complaintId={complaint.id}/>
+                                <Feedback complaintId={complaint.id} complainantPhone={complaint.complainant_phone}/>
                             </div>
                         </>
                         :

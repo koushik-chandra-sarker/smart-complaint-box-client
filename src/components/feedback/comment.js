@@ -32,9 +32,9 @@ const Comment = ({complaintId, feedback, refetchFeedback}) => {
     }
 
     return (
-        <div className={"flex gap-5 items-start my-5"}>
-            <div className="avatar placeholder">
-                <div className="bg-neutral-focus text-neutral-content rounded-full w-12 h-12">
+        <div className={"flex md:gap-5 gap-2 items-start my-5"}>
+            <div className="avatar placeholder md:block hidden ">
+                <div className="bg-neutral-focus text-neutral-content rounded-full md:w-12 md:h-12 w-8 h-8">
                     <span>{_.isEmpty(feedback.user?.salutation) ? "UN" : feedback.user?.salutation}</span>
                 </div>
             </div>
@@ -44,7 +44,7 @@ const Comment = ({complaintId, feedback, refetchFeedback}) => {
                         <h4 className={"font-semibold"}>
                             {feedback.user?.salutation} {feedback.user?.first_name} {feedback.user?.last_name}
                         </h4>
-                        <span className={'text-gray-400 text-xs'}>{feedback.created_at}</span> {feedback.id}
+                        <span className={'text-gray-400 text-xs'}>{feedback.created_at}</span>
                     </div>
                     <p className={"mt-2"}>
                         {feedback.comments}
@@ -58,15 +58,15 @@ const Comment = ({complaintId, feedback, refetchFeedback}) => {
                     }
 
                 </div>
-                <form onSubmit={replayForm.handleSubmit} className={"mt-10 flex gap-5 items-center"}>
+                <form onSubmit={replayForm.handleSubmit} className={"mt-10 flex md:gap-5 gap-2 items-end"}>
                     <textarea
                         id={"replay"}
                         name={"comments"}
                         value={replayForm.values.comments}
                         onChange={replayForm.handleChange}
-                        className="textarea textarea-sm textarea-bordered w-full h-[10px]"
+                        className="textarea textarea-sm textarea-bordered w-full md:h-[10px] h-[8px]"
                         placeholder="Feedback"></textarea>
-                    <button type={"submit"} className={"  btn  bg-secondary-400 hover:bg-secondary-500 text-white"}>replay
+                    <button type={"submit"} className={"  btn btn-sm text-xs  bg-secondary-400 hover:bg-secondary-500 text-white"}>replay
                     </button>
                 </form>
             </div>

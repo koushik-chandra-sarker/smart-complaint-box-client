@@ -8,7 +8,7 @@ const Replay = ({replay}) => {
     }
     return (
         <div className={"flex gap-5 items-start my-5"}>
-            <div className="avatar placeholder">
+            <div className="avatar placeholder md:block hidden">
                 <div className="bg-secondary-400 text-gray-50 rounded-full w-8 h-8">
                     <span className={"text-xs"}>{_.isEmpty(replay.user?.salutation) ? "UN" : replay.user?.salutation}</span>
                 </div>

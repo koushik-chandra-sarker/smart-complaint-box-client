@@ -31,7 +31,8 @@ export const API = {
         },
         feedback: {
             getByComId: "/complaint-box/v1/feedback/complaint/",
-            add: "complaint-box/v1/feedback/"
-        }
+            add: "/complaint-box/v1/feedback/"
+        },
+        sendSms: "/complaint-box/v1/send-sms/"
     }
 }
