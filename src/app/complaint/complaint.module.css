@@ -2,7 +2,7 @@
 
 }
 .innerContainer{
-    @apply container m-auto  w-full md:px-0 px-5
+    @apply container m-auto  w-full md:px-10 px-5
 }
 .title{
     @apply bg-primary-200 mt-5 p-5 rounded-xl shadow

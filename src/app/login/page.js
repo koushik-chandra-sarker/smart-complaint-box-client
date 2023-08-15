@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loginSuccess, selectIsAuthenticated} from "@/redux/slices/authSlice";
 import {redirect, useRouter} from "next/navigation";
 import {AppRoutes} from "@/utils/appRoutes";
+import Link from "next/link";
 
 const Page = () => {
 
@@ -62,18 +63,15 @@ const Page = () => {
                                        placeholder="আপনার পাসওয়ার্ড"
                                        className="input input-bordered w-full"/>
                             </div>
-                            {/*<div className="form-control mt-5">
-                                <label className="cursor-pointer label">
-                                    <span className="label-text">Remember me</span>
-                                    <input type="checkbox"  className="checkbox checkbox-success"/>
-                                </label>
-                            </div>*/}
                             <div className="form-control w-full mt-5">
                                 <button type={"submit"} className="btn btn-block bg-primary-400 hover:bg-primary-500 text-white">
                                     {
                                         isLoading? <span className="loading loading-dots loading-sm"></span>:  <>লগইন</>
                                     }
                                 </button>
+                            </div>
+                            <div className="form-control w-full mt-5">
+                                <Link className={"text-xs text-blue-400"} href={"#"}>রিসেট পাসওয়ার্ড।</Link>
                             </div>
                         </div>
                     </div>

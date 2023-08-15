@@ -13,7 +13,8 @@ import Swal from "sweetalert2";
 import Loading from "@/components/loader/loading";
 
 const Page = () => {
-    const [selectedMunicipality, setSelectedMunicipality] = useState(0)
+    const [selectedMunicipality, setSelectedMunicipality] = useState({})
+    const [selectedMunicipalityId, setSelectedMunicipalityId] = useState(0)
     const [submitLoading, setSubmitLoading] = useState(false)
     const [selectedInstituteTypeId, setSelectedInstituteTypeId] = useState(0)
     const [filteredInstitution, setFilteredInstitution] = useState(0)
@@ -26,8 +27,12 @@ const Page = () => {
 
     function handleSelectMunicipality(e) {
         const municipalityId = e.target.value;
+        setSelectedMunicipalityId(municipalityId)
         const municipality = municipalityList?.find(m => m.id == municipalityId);
         setSelectedMunicipality(municipality);
+        setSelectedInstituteTypeId(0)
+        complaintFormik.values.institute = 0
+
     }
 
 
@@ -36,6 +41,7 @@ const Page = () => {
         setSelectedInstituteTypeId(id);
         const instList = selectedMunicipality?.institute_set?.filter(inst => inst.institute_type?.id == id);
         setFilteredInstitution(instList);
+        console.log("selectedMunicipality", selectedMunicipality)
     }
 
 
@@ -149,29 +155,26 @@ const Page = () => {
                                     }
                                 </select>
                             </div>
-                            {/*<div className="form-control w-full ">
+                            <div className="form-control w-full ">
                                 <label className="label">
-                                    <span className="label-text">Title</span>
-                                    <span className="label-text">শিরোনাম</span>
+                                    <span className="label-text">প্রেরকের নাম </span>
                                     <span
                                         className="label-text bg-red-200 px-2 rounded text-red-500">
-                                        {complaintFormik.errors.title}
+                                        {complaintFormik.errors.complainant_name}
                                     </span>
                                 </label>
-                                <input type="text" placeholder="শিরোনাম লিখুন.."
-
-                                       id={"complaintTitle"}
-                                       name={"title"}
-                                       value={complaintFormik.values.title}
-                                       onChange={complaintFormik.handleChange}
-                                       className="input input-bordered w-full "/>
-
-
-                            </div>*/}
+                                <input
+                                    id={"complainant_name"}
+                                    name={"complainant_name"}
+                                    onChange={complaintFormik.handleChange}
+                                    value={complaintFormik.values.complainant_name}
+                                    type="text" placeholder="প্রেরকের নাম লিখুন "
+                                    className="input input-bordered w-full "/>
+                            </div>
                             <div className="form-control w-full ">
                                 <label className="label">
                                     {/*<span className="label-text">Complainant Type</span>*/}
-                                    <span className="label-text">ভুক্তভোগীর সাথে সম্পর্ক</span>
+                                    <span className="label-text">শিক্ষার্থীর সাথে সম্পর্ক</span>
                                     <span
                                         className="label-text bg-red-200 px-2 rounded text-red-500">
                                         {complaintFormik.errors.complainant_type}
@@ -193,24 +196,7 @@ const Page = () => {
                                     }
                                 </select>
                             </div>
-                            <div className="form-control w-full ">
-                                <label className="label">
-                                    <span className="label-text">প্রেরকের নাম </span>
-                                    <span
-                                        className="label-text bg-red-200 px-2 rounded text-red-500">
-                                        {complaintFormik.errors.complainant_name}
-                                    </span>
-                                </label>
-                                <input
-                                    disabled={complaintFormik.values.complainant_type === 0}
 
-                                    id={"complainant_name"}
-                                    name={"complainant_name"}
-                                    onChange={complaintFormik.handleChange}
-                                    value={complaintFormik.values.complainant_name}
-                                    type="text" placeholder="প্রেরকের নাম লিখুন "
-                                    className="input input-bordered w-full "/>
-                            </div>
                             <div className="form-control w-full ">
                                 <label className="label">
                                     <span className="label-text">মোবাইল নম্বর</span>
@@ -229,7 +215,7 @@ const Page = () => {
                             </div>
                             <div className="form-control w-full ">
                                 <label className="label">
-                                    <span className="label-text">ইমেইল (যদি থাকে)</span>
+                                    <span className="label-text">ইমেইল</span>
                                     <span
                                         className="label-text bg-red-200 px-2 rounded text-red-500">
                                         {complaintFormik.errors.complainant_email}
@@ -246,11 +232,11 @@ const Page = () => {
 
                             <div className="form-control w-full ">
                                 <label className="label">
-                                    <span className="label-text">ইউনিয়ন</span>
+                                    <span className="label-text">ইউনিয়নের নাম</span>
                                 </label>
                                 <select className="select select-bordered w-full "
                                         onChange={handleSelectMunicipality}
-                                        value={selectedMunicipality}
+                                        value={selectedMunicipalityId}
 
                                 >
                                     <option disabled value="0">--নির্বাচন করুন--</option>
@@ -263,11 +249,11 @@ const Page = () => {
                             </div>
                             <div className="form-control w-full ">
                                 <label className="label">
-                                    <span className="label-text">শিক্ষালয়ের ধরণ</span>
+                                    <span className="label-text">প্রতিষ্ঠানের ধরন</span>
                                 </label>
                                 <select className="select select-bordered w-full "
                                         disabled={_.isEmpty(selectedMunicipality)}
-                                        defaultValue="0"
+                                        value={selectedInstituteTypeId}
                                         onChange={handleSelectInstituteType}
 
                                 >
@@ -281,7 +267,7 @@ const Page = () => {
                             </div>
                             <div className="form-control w-full ">
                                 <label className="label">
-                                    <span className="label-text">শিক্ষালয়ের নাম </span>
+                                    <span className="label-text">প্রতিষ্ঠানের নাম </span>
                                     <span
                                         className="label-text bg-red-200 px-2 rounded text-red-500">
                                         {complaintFormik.errors.institute}
@@ -305,6 +291,22 @@ const Page = () => {
                             </div>
                             <div className="form-control w-full ">
                                 <label className="label">
+                                    <span className="label-text">শিক্ষার্থীর নাম</span>
+                                    <span
+                                        className="label-text bg-red-200 px-2 rounded text-red-500">
+                                        {complaintFormik.errors.student_name}
+                                    </span>
+                                </label>
+                                <input type="text"
+                                       placeholder="শিক্ষার্থীর নাম লিখুন"
+                                       id={"student_name"}
+                                       name={"student_name"}
+                                       value={complaintFormik.values.student_name}
+                                       onChange={complaintFormik.handleChange}
+                                       className="input input-bordered w-full "/>
+                            </div>
+                            <div className="form-control w-full ">
+                                <label className="label">
                                     <span className="label-text">শ্রেণী</span>
                                     <span
                                         className="label-text bg-red-200 px-2 rounded text-red-500">
@@ -312,7 +314,6 @@ const Page = () => {
                                     </span>
                                 </label>
                                 <select className="select select-bordered w-full"
-
                                         disabled={complaintFormik.values.institute === 0}
                                         id={"student_class"}
                                         name={"student_class"}
@@ -327,26 +328,10 @@ const Page = () => {
                                     }
                                 </select>
                             </div>
-                            <div className="form-control w-full ">
-                                <label className="label">
-                                    <span className="label-text">শিক্ষার্থীর নাম</span>
-                                    <span
-                                        className="label-text bg-red-200 px-2 rounded text-red-500">
-                                        {complaintFormik.errors.student_name}
-                                    </span>
-                                </label>
-                                <input type="text"
-                                       placeholder="শিক্ষার্থীর নাম লিখুন"
 
-                                       id={"student_name"}
-                                       name={"student_name"}
-                                       value={complaintFormik.values.student_name}
-                                       onChange={complaintFormik.handleChange}
-                                       className="input input-bordered w-full "/>
-                            </div>
                             <div className="form-control w-full ">
                                 <label className="label">
-                                    <span className="label-text">শিক্ষার্থীর রোল নম্বর</span>
+                                    <span className="label-text">রোল</span>
                                     <span
                                         className="label-text bg-red-200 px-2 rounded text-red-500">
                                         {complaintFormik.errors.student_roll}
