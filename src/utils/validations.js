@@ -38,6 +38,9 @@ export function complaint_form_validation(values) {
     else if (!values.complained_to) errors.complained_to = "বাধ্যতামূলক"
     else if (!values.subject) errors.subject = "বাধ্যতামূলক"
     else if (!values.details) errors.details = "বাধ্যতামূলক"
+    else if (values.details.split(" ").length > 500){
+        errors.details = "সর্বোচ্চ শব্দ সীমা ৫০০"
+    }
 
     return errors;
 

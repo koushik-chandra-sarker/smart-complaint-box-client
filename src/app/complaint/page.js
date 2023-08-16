@@ -365,12 +365,11 @@ const Page = () => {
                                 </label>
                                 <textarea className="textarea textarea-bordered"
                                           disabled={complaintFormik.values.subject === 0}
-
                                           id={"details"}
                                           name={"details"}
                                           value={complaintFormik.values.details}
                                           onChange={complaintFormik.handleChange}
-                                          placeholder="অভিযোগ / মতামত / পরার্মশ এর বিস্তারিত লিখুন "/>
+                                          placeholder="অভিযোগ / মতামত / পরার্মশ এর বিস্তারিত লিখুন (সর্বোচ্চ শব্দ সীমা ৫০০)"/>
                             </div>
 
                         </div>
