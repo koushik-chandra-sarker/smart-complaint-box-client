@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from "lodash"
-import Replay from "@/components/feedback/repaly";
+import Reply from "@/components/feedback/reply";
 import {useFormik} from "formik";
 import Swal from "sweetalert2";
 import {useAddFeedbackMutation} from "@/redux/services/feedbackApi";
@@ -46,14 +46,14 @@ const Comment = ({complaintId, feedback, refetchFeedback}) => {
                         </h4>
                         <span className={'text-gray-400 text-xs'}>{feedback.created_at}</span>
                     </div>
-                    <p className={"mt-2"}>
+                    <p className={"mt-2 break-all text-justify"}>
                         {feedback.comments}
                     </p>
                 </div>
                 <div>
                     {
                         feedback?.replies?.map((replay, index) => (
-                            <Replay key={index} fee replay={replay}/>
+                            <Reply key={index} fee replay={replay}/>
                         ))
                     }
 
@@ -65,8 +65,8 @@ const Comment = ({complaintId, feedback, refetchFeedback}) => {
                         value={replayForm.values.comments}
                         onChange={replayForm.handleChange}
                         className="textarea textarea-sm textarea-bordered w-full md:h-[10px] h-[8px]"
-                        placeholder="Feedback"></textarea>
-                    <button type={"submit"} className={"  btn btn-sm text-xs  bg-secondary-400 hover:bg-secondary-500 text-white"}>replay
+                        placeholder="প্রতিউত্তর দিন "></textarea>
+                    <button type={"submit"} className={"  btn btn-sm text-xs  bg-secondary-400 hover:bg-secondary-500 text-white"}>দাখিল করুন
                     </button>
                 </form>
             </div>

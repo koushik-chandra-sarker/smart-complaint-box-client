@@ -25,21 +25,25 @@ const Feedback = ({complaintId, complainantPhone}) => {
                     title: 'আপনি কি প্রেরকের কাছে এসএমএস পাঠাতে চান?',
                     text: "আপনার এসএমএস সম্পূর্ণ বাংলায় হতে হবে অন্যথায় আপনার এসএমএস সার্ভিসটি ব্লক করা হবে",
                     showDenyButton: true,
-                    showCancelButton: true,
                     confirmButtonText: 'হ্যাঁ',
                     denyButtonText: `না`,
                 }).then((result) => {
 
                     if (result.isConfirmed) {
-                        sendSms({to:complainantPhone, message:values.comments}).unwrap().then(
-                            (res)=>{
-                                if (res.statusCode === 200){
-                                    Swal.fire('প্রেরকের কাছে এসএমএস পাঠানো হয়েছে।', '', 'success')
+                        if (values.comments.length <= 400) {
+                            sendSms({to: complainantPhone, message: values.comments}).unwrap().then(
+                                (res) => {
+                                    if (res.statusCode === 200) {
+                                        Swal.fire('প্রেরকের কাছে এসএমএস পাঠানো হয়েছে।', '', 'success')
+                                    }
+                                }, () => {
+                                    Swal.fire('Something went wrong.', '', 'error')
                                 }
-                            },()=>{
-                                Swal.fire('Something went wrong.', '','error')
-                            }
-                        )
+                            )
+                        }else {
+                            Swal.fire('সর্বোচ্চ অক্ষর  সীমা ৪০০', '', 'error')
+                        }
+
                     } else if (result.isDenied) {
                         Swal.fire('প্রতিক্রিয়া সংরক্ষণ করা হয়েছে', '', 'info')
                     }
@@ -64,10 +68,10 @@ const Feedback = ({complaintId, complainantPhone}) => {
                     name={"comments"}
                     value={feedbackForm.values.comments}
                     onChange={feedbackForm.handleChange}
-                    className="textarea textarea-bordered w-full" placeholder="Feedback"></textarea>
+                    className="textarea textarea-bordered w-full" placeholder="প্রতিক্রিয়া (সর্বোচ্চ ৪০০ অক্ষরের মধ্যে লিখুন)"></textarea>
                 <div className={"flex justify-end"}>
                     <button type={"submit"}
-                            className={"btn btn-sm bg-secondary-400 hover:bg-secondary-500 text-white mt-2"}>Submit
+                            className={"btn btn-sm bg-secondary-400 hover:bg-secondary-500 text-white mt-2"}>দাখিল করুন
                     </button>
                 </div>
             </form>

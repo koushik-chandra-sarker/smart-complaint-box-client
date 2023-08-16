@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from "lodash"
 
-const Replay = ({replay}) => {
+const Reply = ({replay}) => {
 
     if (_.isEmpty(replay)) {
         return null;
@@ -21,7 +21,7 @@ const Replay = ({replay}) => {
                         </h4>
                         <span className={'text-gray-400 text-xs'}>{replay.created_at}</span>
                     </div>
-                    <p className={"mt-2"}>
+                    <p className={"mt-2 break-all text-justify"}>
                         {replay.comments}
                     </p>
                 </div>
@@ -31,4 +31,4 @@ const Replay = ({replay}) => {
     );
 };
 
-export default Replay;
+export default Reply;
