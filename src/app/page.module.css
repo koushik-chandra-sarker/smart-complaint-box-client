@@ -1,8 +1,8 @@
 .hero {
-    @apply lg:h-[600px] md:h-[500px] h-[300px] relative
+    @apply h-[250px] sm:h-[200px]  md:h-[400px] xl:h-[450px] 2xl:h-[550px]   relative
 }
 .hero .background .bgImg{
-    @apply w-full h-full absolute z-10 object-cover
+    @apply w-full h-full absolute z-10 md:object-cover object-cover
 
 }
 .hero .background .overlay{

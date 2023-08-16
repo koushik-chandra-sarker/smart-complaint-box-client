@@ -11,7 +11,8 @@ export default function Home() {
         <div>
             <div className={styles.hero}>
                 <div className={styles.background}>
-                    <Image className={styles.bgImg} src={"/images/banner.jpg"} width={1000} height={800} alt={"banner"}/>
+                    <Image className={`${styles.bgImg} md:block hidden`} src={"/images/banner.jpg"} width={1000} height={800} alt={"banner"}/>
+                    <Image className={`${styles.bgImg}  md:hidden block `} src={"/images/banner-m.jpg"} width={1000} height={800} alt={"banner"}/>
                     <div className={styles.overlay}/>
                     <div className={styles.inner}>
                         <div className={"flex flex-col gap-5 items-center"}>
