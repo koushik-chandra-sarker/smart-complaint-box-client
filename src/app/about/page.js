@@ -17,7 +17,7 @@ const Page = () => {
                             <h2 className="mb-4 text-4xl font-semibold text-secondary-400">
                               {aboutPage.title}
                             </h2>
-                            <p className="mb-10 text-base leading-7 text-gray-500 dark:text-gray-400">
+                            <p className="mb-10 text-base leading-7 text-gray-500 dark:text-gray-400 text-justify">
                                 {aboutPage.content}
                             </p>
                         </div>
