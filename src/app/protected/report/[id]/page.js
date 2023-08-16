@@ -105,7 +105,7 @@ const Page = ({params}) => {
                                         <h3 className={"font-bold"}>অভিযোগকারীর বিবরণ</h3>
                                         <div className={"divider"}/>
                                         <div className={"grid  gap-1"}>
-                                            <div> ভুক্তভোগীর সাথে সম্পর্ক: {complaint.complainant_type?.name}</div>
+                                            <div> শিক্ষার্থীর সাথে সম্পর্ক: {complaint.complainant_type?.name}</div>
                                             <div> নাম: {complaint.complainant_name}</div>
                                             <div> ফোন: {complaint.complainant_phone}</div>
                                             <div> ইমেইল: {complaint.complainant_email}</div>
@@ -117,18 +117,18 @@ const Page = ({params}) => {
                                         <h3 className={"font-bold"}>শিক্ষার্থীর বিবরণ</h3>
                                         <div className={"divider"}/>
                                         <div className={"grid gap-1"}>
-                                            <div> ছাত্রের নাম: {complaint.student_name}</div>
-                                            <div> ছাত্রের রোল: {complaint.student_roll}</div>
-                                            <div> ছাত্রের শ্রেণী: {complaint.student_class?.name}</div>
+                                            <div> নাম: {complaint.student_name}</div>
+                                            <div> রোল: {complaint.student_roll}</div>
+                                            <div> শ্রেণী: {complaint.student_class?.name}</div>
                                         </div>
                                     </div>
                                     <div className={" mt-10"}>
                                         <h3 className={"font-bold"}>প্রতিষ্ঠানের বিবরণ</h3>
                                         <div className={"divider"}/>
                                         <div className={" grid gap-1"}>
-                                            <div> অঞ্চল: {complaint.institute?.municipality?.name}</div>
-                                            <div> ধরণ: {complaint.institute?.institute_type?.name}</div>
                                             <div> প্রতিষ্ঠান: {complaint.institute?.name}</div>
+                                            <div> ধরণ: {complaint.institute?.institute_type?.name}</div>
+                                            <div> ইউনিয়ন: {complaint.institute?.municipality?.name}</div>
                                             <div> ঠিকানা: {complaint.institute?.address}</div>
                                         </div>
                                     </div>

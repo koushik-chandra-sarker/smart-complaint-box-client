@@ -55,7 +55,6 @@ const Page = () => {
                                         <table className="table md:table-sm table-xs table-pin-rows table-zebra">
                                             {/*<colgroup>*/}
                                             {/*    <col/>*/}
-                                            {/*    <col/>*/}
                                             {/*    <col />*/}
                                             {/*    <col/>*/}
                                             {/*    <col/>*/}
@@ -66,7 +65,6 @@ const Page = () => {
                                             <thead>
 
                                             <tr>
-                                                <th></th>
                                                 <th>আইডি</th>
                                                 <th>বরাবর</th>
                                                 <th>বিষয়</th>
@@ -81,7 +79,6 @@ const Page = () => {
                                                 complaintList && complaintList?.map((complaint, index) => (
                                                     <tr key={index} className={"cursor-pointer"}
                                                         onClick={() => handleRowClick(complaint.id)}>
-                                                        <th>{index}</th>
                                                         <th>{complaint.id}</th>
                                                         <th>{complaint.complained_to?.name}</th>
                                                         <th>{complaint.subject?.name}</th>
@@ -104,7 +101,6 @@ const Page = () => {
 
                                             <tfoot>
                                             <tr>
-                                                <th></th>
                                                 <th>আইডি</th>
                                                 <th>বরাবর</th>
                                                 <th>বিষয়</th>
