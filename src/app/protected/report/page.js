@@ -5,6 +5,7 @@ import {useGetAllComplaintQuery} from "@/redux/services/complaintApi";
 import {usePathname} from "next/navigation";
 import {useRouter} from "next/navigation";
 import Loading from "@/components/loader/loading";
+import _ from "lodash";
 
 const getStatusBadgeClasses = (status) => {
     switch (status) {
@@ -81,7 +82,7 @@ const Page = () => {
                                                         onClick={() => handleRowClick(complaint.id)}>
                                                         <th>{complaint.id}</th>
                                                         <th>{complaint.complained_to?.name}</th>
-                                                        <th>{complaint.subject?.name}</th>
+                                                        <th>{!_.isEmpty(complaint.subject)? complaint.subject?.name: complaint.subject_alt}</th>
                                                         <th>{complaint.complainant_name}</th>
                                                         <th>{complaint.complainant_phone}</th>
                                                         <th>{complaint.created_at}</th>

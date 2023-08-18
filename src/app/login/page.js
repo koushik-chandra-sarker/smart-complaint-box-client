@@ -8,6 +8,7 @@ import {loginSuccess, selectIsAuthenticated} from "@/redux/slices/authSlice";
 import {redirect, useRouter} from "next/navigation";
 import {AppRoutes} from "@/utils/appRoutes";
 import Link from "next/link";
+import {loginPage} from "@/utils/data";
 
 const Page = () => {
 
@@ -34,9 +35,9 @@ const Page = () => {
         },
     });
     return (
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-10 lg:px-8">
 
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <form onSubmit={loginForm.handleSubmit} className="modal-box max-w-[400px]">
                     <div className={styles.loginContainer}>
                         <h4>লগইন</h4>
@@ -71,7 +72,7 @@ const Page = () => {
                                 </button>
                             </div>
                             <div className="form-control w-full mt-5">
-                                <Link className={"text-xs text-blue-400"} href={"#"}>রিসেট পাসওয়ার্ড।</Link>
+                                <Link className={"text-xs text-blue-400"} href={loginPage.passwordResetUrl} target={"_blank"}>রিসেট পাসওয়ার্ড।</Link>
                             </div>
                         </div>
                     </div>

@@ -4,12 +4,13 @@ import {handleTokenExpiryAndRefresh} from "@/redux/slices/authSlice";
 import {redirect, useRouter} from "next/navigation";
 
 export default function ProtectedLayout({children}) {
-    const {isAuthenticated} = useSelector(state => state.auth);
+    const router = useRouter()
     const dispatch = useDispatch();
     dispatch(handleTokenExpiryAndRefresh());
+    const {isAuthenticated} = useSelector(state => state.auth);
 
     if (!isAuthenticated) {
-        redirect("/login")
+        router.push("/login")
     } else {
         return (
             <>

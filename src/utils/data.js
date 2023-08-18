@@ -33,3 +33,7 @@ export const aboutPage = {
         " মাধ্যম হিসেবে কাজ করে।" ,
     image: "/images/logo-pad.png"
 }
+
+export const loginPage= {
+    passwordResetUrl: 'https://admin.smartovijogbox.com/admin/password_change/'
+}

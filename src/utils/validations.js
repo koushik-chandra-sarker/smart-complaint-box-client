@@ -24,8 +24,12 @@ export function complaint_form_validation(values) {
     const errors = {};
     const phoneRegex = /^0\d{10}$/;
     const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (!values.complainant_type) errors.complainant_type = "বাধ্যতামূলক"
+    if (!values.complained_to) errors.complained_to = "বাধ্যতামূলক"
+    else if (values.subject === 0) errors.subject = "বাধ্যতামূলক"
+    else if (values.subject == "-1" && !values.subject_alt) errors.subject_alt = "বাধ্যতামূলক"
     else if (!values.complainant_name) errors.complainant_name = "বাধ্যতামূলক"
+    else if (values.complainant_type === 0) errors.complainant_type = "বাধ্যতামূলক"
+    else if (values.complainant_type_alt == "-1" && !values.complainant_type_alt) errors.complainant_type_alt = "বাধ্যতামূলক"
     else if (!values.complainant_phone) errors.complainant_phone = "বাধ্যতামূলক"
     else if (phoneRegex.test(values.complainant_phone)) {
         errors.complainant_phone = "বাধ্যতামূলক"
@@ -35,10 +39,10 @@ export function complaint_form_validation(values) {
     else if (!values.student_roll) errors.student_roll = "বাধ্যতামূলক"
     else if (!values.student_class) errors.student_class = "বাধ্যতামূলক"
     else if (!values.institute) errors.institute = "বাধ্যতামূলক"
-    else if (!values.complained_to) errors.complained_to = "বাধ্যতামূলক"
-    else if (!values.subject) errors.subject = "বাধ্যতামূলক"
+
+
     else if (!values.details) errors.details = "বাধ্যতামূলক"
-    else if (values.details.split(" ").length > 500){
+    else if (values.details.split(" ").length > 500) {
         errors.details = "সর্বোচ্চ শব্দ সীমা ৫০০"
     }
 

@@ -100,7 +100,7 @@ const Page = ({params}) => {
                                         </select>
                                     </div>
                                     <div className={'mt-5'}>বরাবর: {complaint.complained_to?.name}</div>
-                                    <div>বিষয়: {complaint.subject?.name}</div>
+                                    <div>বিষয়: {!_.isEmpty(complaint.subject)? complaint.subject?.name: complaint.subject_alt}</div>
                                     <div className={" mt-10"}>
                                         <h3 className={"font-bold"}>অভিযোগকারীর বিবরণ</h3>
                                         <div className={"divider"}/>
