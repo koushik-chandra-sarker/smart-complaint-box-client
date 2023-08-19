@@ -106,7 +106,7 @@ const Page = () => {
                 //sending otp
                 sendSms({
                     to: values.complainant_phone,
-                    message: `আপনার স্মার্ট অভিযোগ বাক্স ভেরিফিকেশন কোড হল ${OPT.code}, কোডটি ২ মিনিটের মধ্যে ব্যবহার করতে হবে. `
+                    message: `আপনার "স্মার্ট অভিযোগ বক্স" ভেরিফিকেশন কোড হল ${OPT.code}, কোডটি ২ মিনিটের মধ্যে ব্যবহার করতে হবে. `
                 }).unwrap().then(res => {
                         // if otp sent successful
                         if (res.statusCode === 200) {
@@ -126,12 +126,14 @@ const Page = () => {
                                     if (OPT.code == res.value && (Date.now()-OPT.generateTime) <(1000* 60 *2)){
                                         // if opt valid
                                         submitComplaint(values)
+                                    }else {
+                                        Swal.fire('আপনি ভুল কোড দিয়েছেন, অথবা কোডটির মেয়াদ শেষ। আবার চেষ্টা করুন।', '', 'error')
                                     }
                                 }
                             })
                         }
                     },
-                    error=>{
+                    ()=>{
                         Swal.fire('Something went wrong.', '', 'error')
                     }
                 )
