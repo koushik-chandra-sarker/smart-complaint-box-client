@@ -2,7 +2,7 @@
 
 }
 .innerSection{
-    @apply container mx-auto flex md:flex-nowrap flex-wrap md:justify-start justify-center gap-20 my-32 md:px-60 px-5
+    @apply container mx-auto flex md:flex-nowrap flex-wrap md:justify-start justify-center gap-20 mt-10 md:px-60 px-5
 }
 .reverse{
     @apply flex-row-reverse
@@ -11,13 +11,13 @@
 
 }
 .speech .title{
-    @apply text-4xl font-bold
+    @apply text-2xl font-bold
 }
 .speech .title span{
     @apply text-secondary-400
 }
 .speech .body{
-    @apply text-gray-600 text-base mt-8 text-justify
+    @apply text-gray-600 text-base mt-5 text-justify
 }
 .speech .name{
     @apply text-xl font-bold mt-8 text-gray-800

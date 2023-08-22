@@ -3,7 +3,7 @@ export const API = {
     baseUrl: "https://admin.smartovijogbox.com/api",
     auth: {
         login: "/author/login/",
-        refreshToken: "/token/refresh/",
+        refreshToken: "/author/token/refresh/",
         // registration: "/user/create",
         // logout: "/user/logout",
         // activate: "/user/activation"

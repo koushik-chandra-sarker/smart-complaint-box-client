@@ -1,5 +1,5 @@
 .hero {
-    @apply h-[250px] sm:h-[200px]  md:h-[400px] xl:h-[450px] 2xl:h-[550px]   relative
+    @apply h-[280px] sm:h-[200px]  md:h-[400px] xl:h-[450px] 2xl:h-[550px]   relative
 }
 .hero .background .bgImg{
     @apply w-full h-full absolute z-10 md:object-cover object-cover
@@ -15,6 +15,9 @@
 }
 
 
+.hero .background  .inner h4 {
+    @apply md:text-xl text-base font-extrabold text-white text-center
+}
 .hero .background  .inner h1 {
     @apply md:text-4xl text-xl font-extrabold text-white text-center
 

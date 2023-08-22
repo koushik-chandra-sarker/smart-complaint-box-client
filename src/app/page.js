@@ -16,6 +16,7 @@ export default function Home() {
                     <div className={styles.overlay}/>
                     <div className={styles.inner}>
                         <div className={"flex flex-col gap-5 items-center"}>
+                            <h4>আশুগঞ্জ উপজেলার</h4>
                             <h1>স্মার্ট অভিযোগ বক্সে আপনাকে স্বাগতম</h1>
                             <div className={styles.actionButton}>
                                 {/*<Link className={styles.button} href={`/complaint`}>অভিযোগ করুন</Link>*/}
@@ -42,8 +43,12 @@ export default function Home() {
 
                 </div>
             </div>
-            <div className={"md:mt-0 mt-52"}>
-                <Speech speech={homaPage.speach1}/>
+            <div className={"md:mt-24 mt-32"}>
+                {
+                    homaPage.speeches.map((speech,index)=>(
+                        <Speech key={index}  speech={speech}/>
+                    ))
+                }
                 {/*<Speech reverse={true}/>*/}
             </div>
 
