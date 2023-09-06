@@ -13,7 +13,8 @@ import Swal from "sweetalert2";
 import Loading from "@/components/loader/loading";
 import {generateOTP} from "@/utils/otp";
 import {useSendSmsMutation} from "@/redux/services/smsApi";
-import {error} from "next/dist/build/output/log";
+import {useUploadFileMutation} from "@/redux/services/fileApi";
+import {useDropzone} from "react-dropzone";
 
 const Page = () => {
         const [selectedMunicipality, setSelectedMunicipality] = useState({})
@@ -21,14 +22,17 @@ const Page = () => {
         const [submitLoading, setSubmitLoading] = useState(false)
         const [selectedInstituteTypeId, setSelectedInstituteTypeId] = useState(0)
         const [filteredInstitution, setFilteredInstitution] = useState(0)
+        const {acceptedFiles,fileRejections, getRootProps, getInputProps} = useDropzone();
+        const [uploadedFiles, setUploadedFiles] = useState([])
         const [sendSms] = useSendSmsMutation()
+        const [uploadFile, {isLoading: isLoadingUploadFile}] = useUploadFileMutation()
         const [addComplaint, {isLoading}] = useAddComplaintMutation()
         const {data: municipalityList, isLoading: isMuniLoading} = useGetAllMunicipalityQuery();
         const {data: institutionTypeList, isLoading: isInstTypeLoading} = useGetAllInstitutionTypeQuery();
         const {data: designationList, isLoading: isDesigLoading} = useGetAllDesignationQuery();
         const {data: commonProperty, isLoading: isCommonPropLoading} = useGetCommonPropertyQuery();
 
-
+        console.log(fileRejections)
         function handleSelectMunicipality(e) {
             const municipalityId = e.target.value;
             setSelectedMunicipalityId(municipalityId)
@@ -47,38 +51,39 @@ const Page = () => {
             setFilteredInstitution(instList);
         }
 
-        function submitComplaint(values){
-             setSubmitLoading(true)
-                let data = {...values}
-                if (data.subject == "-1") {
-                    data.subject = ''
-                } else data.subject_alt = '';
-                if (data.complainant_type == "-1") {
-                    data.complainant_type = '';
-                } else {
-                    data.complainant_type_alt = '';
-                }
-                addComplaint(data).unwrap().then(res => {
-                    Swal.fire(
-                        'সফল হয়েছে',
-                        'কর্তৃপক্ষের কাছে অভিযোগ পাঠানো হয়েছে',
-                        'success'
-                    ).then(r => {
-                    })
-                    complaintFormik.resetForm()
-                    setSelectedMunicipalityId(0)
-                    setSelectedInstituteTypeId(0)
-                    setSubmitLoading(false)
-                }, error => {
-                    setSubmitLoading(false)
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!',
-                    }).then(r => {
-                    })
 
+        function submitComplaint(values) {
+            setSubmitLoading(true)
+            let data = {...values}
+            if (data.subject == "-1") {
+                data.subject = ''
+            } else data.subject_alt = '';
+            if (data.complainant_type == "-1") {
+                data.complainant_type = '';
+            } else {
+                data.complainant_type_alt = '';
+            }
+            addComplaint(data).unwrap().then(res => {
+                Swal.fire(
+                    'সফল হয়েছে',
+                    'কর্তৃপক্ষের কাছে অভিযোগ পাঠানো হয়েছে',
+                    'success'
+                ).then(r => {
                 })
+                complaintFormik.resetForm()
+                setSelectedMunicipalityId(0)
+                setSelectedInstituteTypeId(0)
+                setSubmitLoading(false)
+            }, error => {
+                setSubmitLoading(false)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                }).then(r => {
+                })
+
+            })
         }
 
 
@@ -89,7 +94,7 @@ const Page = () => {
                 complainant_name: '',
                 complainant_email: '',
                 complainant_phone: '',
-                file: '',
+                files: [],
                 student_name: '',
                 student_roll: '',
                 student_class: 0,
@@ -122,29 +127,71 @@ const Page = () => {
                                 }
                             }).then(res => {
                                 // if otp provided by user
-                                if (res.isConfirmed){
-                                    if (OPT.code == res.value && (Date.now()-OPT.generateTime) <(1000* 60 *2)){
+                                if (res.isConfirmed) {
+                                    if (OPT.code == res.value && (Date.now() - OPT.generateTime) < (1000 * 60 * 2)) {
                                         // if opt valid
                                         submitComplaint(values)
-                                    }else {
+                                    } else {
                                         Swal.fire('আপনি ভুল কোড দিয়েছেন, অথবা কোডটির মেয়াদ শেষ। আবার চেষ্টা করুন।', '', 'error')
                                     }
                                 }
                             })
                         }
                     },
-                    ()=>{
+                    () => {
                         Swal.fire('Something went wrong.', '', 'error')
                     }
                 )
 
-
-
-
-
             },
 
         });
+        useEffect(() => {
+            if (!_.isEmpty(acceptedFiles)) {
+                Swal.fire({
+                    text: 'ফাইল আপলোড করা হচ্ছে। আপনার ফাইলের আকার অনুযায়ী সময় লাগবে। অনুগ্রহপূর্বক অপেক্ষা করুন.',
+                    allowOutsideClick: false,
+                    allowEnterKey: false,
+                    allowEscapeKey: false,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    },
+                })
+                uploadFile(acceptedFiles).then(res => {
+                    if (res.data?.statusCode == 201) {
+
+                        setUploadedFiles([...uploadedFiles, ...res.data?.data?.upload_info])
+                        complaintFormik.values.files = [...complaintFormik.values.files, ...res.data.data.uploaded_ids]
+                        console.log(complaintFormik.values)
+                        Swal.close()
+                    } else if (!_.isEmpty(res.error)) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: res.error.data?.data?.error
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'দুঃখিত!',
+                            text: ' কিছু ভুল হয়েছে! আবার চেষ্টা করুন '
+                        })
+                    }
+
+                }, err => {
+                    console.log(err)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'দুঃখিত!',
+                        text: ' কিছু ভুল হয়েছে!'
+                    })
+
+                })
+            }
+
+        }, [acceptedFiles])
+        console.log(uploadedFiles)
+
         if (isMuniLoading || isInstTypeLoading || isDesigLoading || isCommonPropLoading) {
             return (<Loading classes={"h-[500px]"}/>)
         }
@@ -410,14 +457,23 @@ const Page = () => {
                                        onChange={complaintFormik.handleChange}
                                        className="input input-bordered w-full "/>
                             </div>
+                        </div>
+                        <div className={'grid grid-cols-1 gap-5'}>
+                            <div
+                                {...getRootProps({className: 'dropzone flex justify-center items-center w-full h-16 border-2 my-5 border-dashed'})}>
+                                <input {...getInputProps()} />
+                                <p className={"text-center text-gray-400"}>ফাইল নির্বাচন করতে ক্লিক করুন অথবা ফাইল ড্র্যাগ
+                                    'ন' ড্রপ করুন <br/> ফাইলের সাইজ সর্বোচ্চ ২০ এমবি</p>
+                            </div>
+                            <ul>
+                                {uploadedFiles.map((info, index) => (
+                                    <li key={index}
+                                        className={`${info.status === 'uploaded' ? 'bg-primary-300' : "bg-red-400"} p-2 my-1`}>
+                                        {info.filename} - {info.status} {info.status === 'error'? `: ${ info.message}`: ""}
+                                    </li>
+                                ))}
+                            </ul>
 
-
-                            {/* <div className="form-control w-full ">
-                                <label className="label">
-                                    <span className="label-text">Attachment</span>
-                                </label>
-                                <input type="file" className="file-input file-input-bordered w-full"/>
-                            </div>*/}
                         </div>
                         <div className={'grid grid-cols-1 gap-5'}>
                             <div className="form-control w-full ">

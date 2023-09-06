@@ -4,7 +4,6 @@ import Speech from "@/components/speech/speech";
 import Link from "next/link";
 import icon from "/public/icon/menu.svg"
 import {homaPage} from "@/utils/data";
-
 export default function Home() {
 
     return (

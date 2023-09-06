@@ -8,8 +8,8 @@ export const complaintApi = createApi({
     baseQuery: baseQueryWithAuth,
     endpoints: (builder) => ({
         getAllComplaint: builder.query({
-            query: (url) => ({
-                url: API.complaintBox.complaint.get+url,
+            query: (queryParam) => ({
+                url: API.complaintBox.complaint.get+'/?ordering=-id&'+queryParam,
                 method: 'GET',
             }),
             meta: {requiredAuth: true},
@@ -38,6 +38,13 @@ export const complaintApi = createApi({
             }),
             // transformResponse: (data) => data
         }),
+        getPdf: builder.mutation({
+            query: (data) => ({
+                url: API.complaintBox.complaint.pdf,
+                method: 'POST',
+                body: data
+            }),
+        }),
     }),
 });
 
@@ -45,5 +52,6 @@ export const {
     useGetAllComplaintQuery,
     useGetComplaintByIdQuery,
     useAddComplaintMutation,
-    useUpdateComplaintStatusMutation
+    useUpdateComplaintStatusMutation,
+    useGetPdfMutation
 } = complaintApi;

@@ -10,6 +10,7 @@ import {authApi} from "@/redux/services/authApi";
 import authReducer from "@/redux/slices/authSlice";
 import {feedbackApi} from "@/redux/services/feedbackApi";
 import {smsApi} from "@/redux/services/smsApi";
+import {fileApi} from "@/redux/services/fileApi";
 
 export const store = configureStore({
     reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
         [complaintApi.reducerPath]: complaintApi.reducer,
         [feedbackApi.reducerPath]: feedbackApi.reducer,
         [smsApi.reducerPath]: smsApi.reducer,
+        [fileApi.reducerPath]: fileApi.reducer,
     },
     devTools: false,
     middleware: (getDefaultMiddleware) =>
@@ -34,5 +36,6 @@ export const store = configureStore({
             .concat([complaintApi.middleware])
             .concat([feedbackApi.middleware])
             .concat([smsApi.middleware])
+            .concat([fileApi.middleware])
 })
 setupListeners(store.dispatch);

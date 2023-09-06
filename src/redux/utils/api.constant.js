@@ -1,6 +1,6 @@
 export const API = {
-    // baseUrl: "http://127.0.0.1:8000/api",
-    baseUrl: "https://admin.smartovijogbox.com/api",
+    baseUrl: "http://127.0.0.1:8000/api",
+    // baseUrl: "https://admin.smartovijogbox.com/api",
     auth: {
         login: "/author/login/",
         refreshToken: "/author/token/refresh/",
@@ -27,12 +27,16 @@ export const API = {
         complaint:{
             get: "complaint-box/v1/get-complaints",
             add: "/complaint-box/v1/complaints/",
-            updateStatus: "/complaint-box/v1/complaints/"
+            updateStatus: "/complaint-box/v1/complaints/",
+            pdf: "/complaint-box/v1/generate-pdf/"
         },
         feedback: {
             getByComId: "/complaint-box/v1/feedback/complaint/",
             add: "/complaint-box/v1/feedback/"
         },
-        sendSms: "/complaint-box/v1/send-sms/"
+        sendSms: "/complaint-box/v1/send-sms/",
+        file:{
+            upload:"/complaint-box/v1/upload/"
+        }
     }
 }

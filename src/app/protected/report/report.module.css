@@ -38,3 +38,10 @@
     height: 30px !important;
     width: 30px !important;
 }
+.actionButton {
+    @apply flex justify-end
+}
+.actionButton .button {
+    @apply inline-flex items-center bg-primary-400  hover:bg-primary-500 text-white border-0
+    py-1 px-3 focus:outline-none transition rounded text-base mt-4 md:mt-0
+}

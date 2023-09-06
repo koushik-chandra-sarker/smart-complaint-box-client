@@ -43,7 +43,7 @@ export const baseQueryWithAuth = fetchBaseQuery({
 
             // window.location.href("/login")
         }
-        headers.set('Content-Type', 'application/json');
+        // headers.set('Content-Type', 'application/json');
         return headers;
     }
 });
