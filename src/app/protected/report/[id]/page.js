@@ -7,10 +7,12 @@ import {statusList} from "@/utils/data";
 import _ from "lodash"
 import Feedback from "@/components/feedback/feedback";
 import Swal from "sweetalert2";
+import ImageGallery from "@/app/protected/report/[id]/ImageGallery";
+import FileViewer from "@/app/protected/report/[id]/FileViewer";
 
 const getStatusBadgeClasses = (status) => {
     switch (status) {
-         case 'pending':
+        case 'pending':
             return 'bg-gray-300 text-gray-800';
         case 'in_progress':
             return 'bg-yellow-300 text-yellow-800';
@@ -100,7 +102,7 @@ const Page = ({params}) => {
                                         </select>
                                     </div>
                                     <div className={'mt-5'}>বরাবর: {complaint.complained_to?.name}</div>
-                                    <div>বিষয়: {!_.isEmpty(complaint.subject)? complaint.subject?.name: complaint.subject_alt}</div>
+                                    <div>বিষয়: {!_.isEmpty(complaint.subject) ? complaint.subject?.name : complaint.subject_alt}</div>
                                     <div className={" mt-10"}>
                                         <h3 className={"font-bold"}>অভিযোগকারীর বিবরণ</h3>
                                         <div className={"divider"}/>
@@ -138,6 +140,21 @@ const Page = ({params}) => {
                                         <div className={" grid gap-1"}>
                                             {complaint.details}
                                         </div>
+                                    </div>
+
+                                    <div className={" mt-10"}>
+                                        <h3 className={"font-bold"}>সংযুক্তি</h3>
+                                        <div className={"divider"}/>
+                                        {
+                                            !_.isEmpty(complaint.files) ?
+                                                <div className={" grid gap-1"}>
+                                                    <ImageGallery files={complaint.files}/>
+                                                    <FileViewer files={complaint.files}/>
+                                                </div>:
+                                                <div className={"text-center flex justify-center"}>
+                                                    <p>কোনো সংযুক্তি পাওয়া যায়নি</p>
+                                                </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
