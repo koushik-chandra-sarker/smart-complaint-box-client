@@ -1,6 +1,6 @@
 export const API = {
-    baseUrl: "http://127.0.0.1:8000/api",
-    // baseUrl: "https://admin.smartovijogbox.com/api",
+    // baseUrl: "http://127.0.0.1:8000/api",
+    baseUrl: "https://admin.smartovijogbox.com/api",
     auth: {
         login: "/author/login/",
         refreshToken: "/author/token/refresh/",
