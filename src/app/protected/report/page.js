@@ -97,9 +97,9 @@ const Page = () => {
                             <>
                                 <div>
                                     <div className={`overflow-x-auto ${styles.table}`}>
-                                        <p className={"text-xs mb-5 text-blue-400"}>
-                                            নোট: বিস্তারিত দেখতে, একটি সারি নির্বাচন করুন।
-                                        </p>
+                                        {/*<p className={"text-xs mb-5 text-blue-400"}>*/}
+                                        {/*    নোট: বিস্তারিত দেখতে, একটি সারি নির্বাচন করুন।*/}
+                                        {/*</p>*/}
                                         <table className="table md:table-sm table-xs table-pin-rows table-zebra">
                                             {/*<colgroup>*/}
                                             {/*    <col/>*/}

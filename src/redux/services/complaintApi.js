@@ -1,5 +1,4 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
-import {baseQuery} from "../utils/baseQuery.js";
 import {API} from "@/redux/utils/api.constant";
 import {baseQueryWithAuth} from "@/redux/utils/baseQueryWithAuth";
 
@@ -9,7 +8,7 @@ export const complaintApi = createApi({
     endpoints: (builder) => ({
         getAllComplaint: builder.query({
             query: (queryParam) => ({
-                url: API.complaintBox.complaint.get+'/?ordering=-id&'+queryParam,
+                url: API.complaintBox.complaint.get+'/?ordering=-created_at&'+queryParam,
                 method: 'GET',
             }),
             meta: {requiredAuth: true},
