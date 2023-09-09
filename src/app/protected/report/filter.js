@@ -90,7 +90,7 @@ const Filter = ({handleFilter}) => {
         <div>
             <form onSubmit={filterForm.handleSubmit}>
                 <div className={' grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5'}>
-                    <div className="form-control w-full ">
+                    {/*<div className="form-control w-full ">
                         <label className="label">
                             <span className="label-text">বরাবর</span>
                         </label>
@@ -135,7 +135,7 @@ const Filter = ({handleFilter}) => {
                             {commonProperty && commonProperty?.complainant_type_list?.map((type, index) => (
                                 <option value={type.id} key={index}>{type.name}</option>))}
                         </select>
-                    </div>
+                    </div>*/}
 
                     <div className="form-control w-full ">
                         <label className="label">
@@ -204,6 +204,7 @@ const Filter = ({handleFilter}) => {
                             <span className="label-text">date</span>
                         </label>
                         <DateRangePicker
+                            showOneCalendar
                             size="sm"
                             format="yyyy-MM-dd"
                             value={dateRange}

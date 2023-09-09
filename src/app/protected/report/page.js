@@ -1,7 +1,10 @@
 "use client"
 import React, {useState} from 'react';
 import styles from './report.module.css'
-import {useGetAllComplaintQuery, useGetPdfMutation} from "@/redux/services/complaintApi";
+import {
+    useGetAllComplaintQuery,
+    useGetIndividualReportPdfMutation
+} from "@/redux/services/complaintApi";
 import {usePathname} from "next/navigation";
 import {useRouter} from "next/navigation";
 import Loading from "@/components/loader/loading";
@@ -35,7 +38,7 @@ const Page = () => {
 
     const router = useRouter()
     const pathname = usePathname()
-    const [getPdf, {isLoading}] = useGetPdfMutation()
+    const [getIndividualReportPdf, {isLoading}] = useGetIndividualReportPdfMutation()
 
     const {
         data: complaintList,
@@ -55,7 +58,7 @@ const Page = () => {
 
 
     function handleDownloadPdf(id) {
-        getPdf({ids: [id]}).unwrap().then(response => {
+        getIndividualReportPdf({ids: [id]}).unwrap().then(response => {
             console.log(response)
         }, error => {
             console.log(error)
@@ -163,6 +166,7 @@ const Page = () => {
                                                 <th>ফোন</th>
                                                 <th>সময়</th>
                                                 <th>অবস্থা</th>
+                                                <th></th>
                                             </tr>
                                             </tfoot>
                                         </table>

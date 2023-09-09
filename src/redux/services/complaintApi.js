@@ -38,9 +38,9 @@ export const complaintApi = createApi({
             }),
             // transformResponse: (data) => data
         }),
-        getPdf: builder.mutation({
+        getIndividualReportPdf: builder.mutation({
             query: (data) => ({
-                url: API.complaintBox.complaint.pdf,
+                url: API.complaintBox.complaint.individualReportPdf,
                 method: 'POST',
                 body: data
             }),
@@ -53,5 +53,5 @@ export const {
     useGetComplaintByIdQuery,
     useAddComplaintMutation,
     useUpdateComplaintStatusMutation,
-    useGetPdfMutation
+    useGetIndividualReportPdfMutation
 } = complaintApi;

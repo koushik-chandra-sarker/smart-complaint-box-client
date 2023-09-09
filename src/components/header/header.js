@@ -3,7 +3,7 @@ import React from 'react';
 import styles from "./header.module.css"
 import LoginModal from "@/components/loginModal/loginModal";
 import {useDispatch, useSelector} from "react-redux";
-import {logout} from "@/redux/slices/authSlice";
+import {handleTokenExpiryAndRefresh, logout} from "@/redux/slices/authSlice";
 import Link from "next/link";
 import {authorizedNav, basicNav} from "@/utils/nav";
 import Image from "next/image";
@@ -12,23 +12,24 @@ import loginIcon from "/public/icon/login.svg"
 import menuIcon from "/public/icon/menu.svg"
 
 const Header = () => {
-    const {isAuthenticated} = useSelector(state => state.auth)
     const dispatch = useDispatch()
+    dispatch(handleTokenExpiryAndRefresh());
+    const {isAuthenticated} = useSelector(state => state.auth)
 
     function handleLogout() {
         dispatch(logout())
     }
 
     return (
-        <header className={styles.header} >
+        <header className={styles.header}>
             <mian className={styles.inner}>
 
-                <section className={"flex gap-5 "} >
+                <section className={"flex gap-5 "}>
                     <Link href={"/"} className={styles.logo}>
                         {/*<span>স্মার্ট অভিযোগ বক্স</span>*/}
                         <Image src={"/images/logo.png"} alt={"logo"} width={500} height={500}/>
                     </Link>
-                    <div className={styles.menu}  >
+                    <div className={styles.menu}>
                         {
                             !isAuthenticated ?
                                 basicNav.map((v, i) => (

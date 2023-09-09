@@ -4,14 +4,17 @@ import Speech from "@/components/speech/speech";
 import Link from "next/link";
 import icon from "/public/icon/menu.svg"
 import {homaPage} from "@/utils/data";
+
 export default function Home() {
 
     return (
         <div>
             <div className={styles.hero}>
                 <div className={styles.background}>
-                    <Image className={`${styles.bgImg} md:block hidden`} src={"/images/banner.jpg"} width={1000} height={800} alt={"banner"}/>
-                    <Image className={`${styles.bgImg}  md:hidden block `} src={"/images/banner-m.jpg"} width={1000} height={800} alt={"banner"}/>
+                    <Image className={`${styles.bgImg} md:block hidden`} src={"/images/banner.jpg"} width={1000}
+                           height={800} alt={"banner"}/>
+                    <Image className={`${styles.bgImg}  md:hidden block `} src={"/images/banner-m.jpg"} width={1000}
+                           height={800} alt={"banner"}/>
                     <div className={styles.overlay}/>
                     <div className={styles.inner}>
                         <div className={"flex flex-col gap-5 items-center"}>
@@ -19,7 +22,8 @@ export default function Home() {
                             <h1>স্মার্ট অভিযোগ বক্সে আপনাকে স্বাগতম</h1>
                             <div className={styles.actionButton}>
                                 {/*<Link className={styles.button} href={`/complaint`}>অভিযোগ করুন</Link>*/}
-                                <Link href={"/about"} className={`${styles.button} !bg-primary-400`}>আমাদের সম্পর্কে</Link>
+                                <Link href={"/about"} className={`${styles.button} !bg-primary-400`}>আমাদের
+                                    সম্পর্কে</Link>
                             </div>
                         </div>
 
@@ -33,7 +37,8 @@ export default function Home() {
                                 </p>
                             </div>
                             <div className={styles.actionButton}>
-                                    <Link className={`${styles.button} !bg-secondary-400 hover:!bg-secondary-500`} href={`/complaint`}>এখানে ক্লিক করুন</Link>
+                                <Link className={`${styles.button} !bg-secondary-400 hover:!bg-secondary-500`}
+                                      href={`/complaint`}>এখানে ক্লিক করুন</Link>
                             </div>
 
                         </div>
@@ -44,8 +49,8 @@ export default function Home() {
             </div>
             <div className={"md:mt-24 mt-32"}>
                 {
-                    homaPage.speeches.map((speech,index)=>(
-                        <Speech key={index}  speech={speech}/>
+                    homaPage.speeches.map((speech, index) => (
+                        <Speech key={index} speech={speech}/>
                     ))
                 }
                 {/*<Speech reverse={true}/>*/}
